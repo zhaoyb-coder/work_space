@@ -21,7 +21,8 @@ public class HelloServer {
         // 1、启动器，负责组装netty组件，启动服务器
         new ServerBootstrap()
             // 2、放入事件的处理器
-            .group(new NioEventLoopGroup())
+            // 第一个参数只负责 ServerSocketChannel的accept事件，第二个负责SocketChannel的读写事件
+            .group(new NioEventLoopGroup(), new NioEventLoopGroup())
             // 3、选择服务器的ServerSocketChannel实现，一共有四种实现
             // NioServerSocketChannel -->针对java NIO的具体实现
             // EpollServerSocketChannel -->针对linux epoll的实现
